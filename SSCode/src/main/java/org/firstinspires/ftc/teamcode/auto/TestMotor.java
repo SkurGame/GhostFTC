@@ -8,13 +8,13 @@ import org.firstinspires.ftc.teamcode.Config;
 
 @Autonomous(name = "test_motor", group = "Concept")
 public class TestMotor extends LinearOpMode {
-    private DcMotor myMotor;
+    private DcMotor leftUp;
 
     @Override
     public void runOpMode() {
-        myMotor = hardwareMap.get(DcMotor.class, "myMotor");
-        myMotor.setDirection(DcMotor.Direction.FORWARD);
-        myMotor.setPower(0);
+        leftUp = hardwareMap.get(DcMotor.class, "leftUp");
+        leftUp.setDirection(DcMotor.Direction.FORWARD);
+        leftUp.setPower(0);
 
         telemetry.addData("Status", "Initialized");
         telemetry.update();
@@ -22,14 +22,14 @@ public class TestMotor extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
-            myMotor.setPower(Config.motorPower.boost);
+            leftUp.setPower(Config.motorPower.boost);
 
             telemetry.addData("Status", "Running");
-            telemetry.addData("Motor Power", "%.2f", myMotor.getPower());
+            telemetry.addData("Motor Power", "%.2f", leftUp.getPower());
             telemetry.update();
         }
 
-        myMotor.setPower(0);
+        leftUp.setPower(0);
         telemetry.addData("Status", "Stopped");
         telemetry.update();
     }
