@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.teleop;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 @TeleOp(name = "teleop_test", group = "Concept")
 public class TestTeleOp extends LinearOpMode {
@@ -13,6 +14,9 @@ public class TestTeleOp extends LinearOpMode {
         leftDown = hardwareMap.get(DcMotor.class, "leftDown");
         rightUp = hardwareMap.get(DcMotor.class, "rightUp");
         rightDown = hardwareMap.get(DcMotor.class, "rightDown");
+        rightUp.setDirection(DcMotor.Direction.REVERSE);
+        rightDown.setDirection(DcMotor.Direction.REVERSE);
+
 
         telemetry.addData("Status", "Initialized");
         telemetry.update();
@@ -20,7 +24,7 @@ public class TestTeleOp extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
-            double ry = -gamepad1.right_stick_y;
+            double ry = gamepad1.right_stick_y;
             double rx = gamepad1.right_stick_x;
             boolean rb = gamepad1.right_bumper;
 
@@ -39,19 +43,6 @@ public class TestTeleOp extends LinearOpMode {
             // ПОВОРОТ
             if (gamepad1.left_trigger > 0.1) {
                 if (rb) {
-                    leftUp.setPower(-power - boostPower);
-                    leftDown.setPower(-power - boostPower);
-                    rightUp.setPower(power + boostPower);
-                    rightDown.setPower(power + boostPower);
-                } else {
-                    leftUp.setPower(-power);
-                    leftDown.setPower(-power);
-                    rightUp.setPower(power);
-                    rightDown.setPower(power);
-                }
-            }
-            else if (gamepad1.right_trigger > 0.1) {
-                if (rb) {
                     leftUp.setPower(power + boostPower);
                     leftDown.setPower(power + boostPower);
                     rightUp.setPower(-power - boostPower);
@@ -61,6 +52,19 @@ public class TestTeleOp extends LinearOpMode {
                     leftDown.setPower(power);
                     rightUp.setPower(-power);
                     rightDown.setPower(-power);
+                }
+            }
+            else if (gamepad1.right_trigger > 0.1) {
+                if (rb) {
+                    leftUp.setPower(-power - boostPower);
+                    leftDown.setPower(-power - boostPower);
+                    rightUp.setPower(power + boostPower);
+                    rightDown.setPower(power + boostPower);
+                } else {
+                    leftUp.setPower(-power);
+                    leftDown.setPower(-power);
+                    rightUp.setPower(power);
+                    rightDown.setPower(power);
                 }
             }
 
@@ -69,13 +73,13 @@ public class TestTeleOp extends LinearOpMode {
                 if (rb) {
                     leftUp.setPower(power + boostPower);
                     leftDown.setPower(power + boostPower);
-                    rightUp.setPower(-power - boostPower);
-                    rightDown.setPower(-power - boostPower);
+                    rightUp.setPower(power + boostPower);
+                    rightDown.setPower(power + boostPower);
                 } else {
                     leftUp.setPower(power);
                     leftDown.setPower(power);
-                    rightUp.setPower(-power);
-                    rightDown.setPower(-power);
+                    rightUp.setPower(power);
+                    rightDown.setPower(power);
                 }
             }
 
@@ -84,78 +88,63 @@ public class TestTeleOp extends LinearOpMode {
                 if (rb) {
                     leftUp.setPower(-power - boostPower);
                     leftDown.setPower(-power - boostPower);
-                    rightUp.setPower(power + boostPower);
-                    rightDown.setPower(power + boostPower);
+                    rightUp.setPower(-power - boostPower);
+                    rightDown.setPower(-power - boostPower);
                 } else {
                     leftUp.setPower(-power);
                     leftDown.setPower(-power);
-                    rightUp.setPower(power);
-                    rightDown.setPower(power);
+                    rightUp.setPower(-power);
+                    rightDown.setPower(-power);
                 }
             }
 
             // ДВИЖЕНИЕ ВПРАВО
             else if (rx > 0 && Math.abs(ry) < 0.2) {
                 if (rb) {
-                    leftUp.setPower(power + boostPower);
-                    leftDown.setPower(-power - boostPower);
-                    rightUp.setPower(-power - boostPower);
-                    rightDown.setPower(power + boostPower);
+                    leftUp.setPower(-power - boostPower);
+                    leftDown.setPower(power + boostPower);
+                    rightUp.setPower(power + boostPower);
+                    rightDown.setPower(-power - boostPower);
                 } else {
-                    leftUp.setPower(power);
-                    leftDown.setPower(-power);
-                    rightUp.setPower(-power);
-                    rightDown.setPower(power);
+                    leftUp.setPower(-power);
+                    leftDown.setPower(power);
+                    rightUp.setPower(power);
+                    rightDown.setPower(-power);
                 }
             }
 
             // ДВИЖЕНИЕ ВЛЕВО
             else if (rx < 0 && Math.abs(ry) < 0.2) {
                 if (rb) {
-                    leftUp.setPower(-power - boostPower);
-                    leftDown.setPower(power + boostPower);
-                    rightUp.setPower(power + boostPower);
-                    rightDown.setPower(-power - boostPower);
-                } else {
-                    leftUp.setPower(-power);
-                    leftDown.setPower(power);
-                    rightUp.setPower(power);
-                    rightDown.setPower(-power);
-                }
-            }
-
-            // ДИАГОНАЛЬ ВПЕРЕД-ВПРАВО
-            else if (ry > 0 && rx > 0) {
-                if (rb) {
                     leftUp.setPower(power + boostPower);
-                    leftDown.setPower(0);
-                    rightUp.setPower(0);
+                    leftDown.setPower(-power - boostPower);
+                    rightUp.setPower(-power - boostPower);
                     rightDown.setPower(power + boostPower);
                 } else {
                     leftUp.setPower(power);
-                    leftDown.setPower(0);
-                    rightUp.setPower(0);
+                    leftDown.setPower(-power);
+                    rightUp.setPower(-power);
                     rightDown.setPower(power);
                 }
             }
 
-            // ДИАГОНАЛЬ ВПЕРЕД-ВЛЕВО
-            else if (ry > 0 && rx < 0) {
+            // ДИАГОНАЛЬ ВПЕРЕД-ВПРАВО
+            else if (ry < 0 && rx > 0) {
                 if (rb) {
-                    leftUp.setPower(0);
-                    leftDown.setPower(power + boostPower);
-                    rightUp.setPower(power + boostPower);
-                    rightDown.setPower(0);
+                    leftUp.setPower(-power - boostPower);
+                    leftDown.setPower(0);
+                    rightUp.setPower(0);
+                    rightDown.setPower(-power - boostPower);
                 } else {
-                    leftUp.setPower(0);
-                    leftDown.setPower(power);
-                    rightUp.setPower(power);
-                    rightDown.setPower(0);
+                    leftUp.setPower(-power);
+                    leftDown.setPower(0);
+                    rightUp.setPower(0);
+                    rightDown.setPower(-power);
                 }
             }
 
-            // ДИАГОНАЛЬ НАЗАД-ВПРАВО
-            else if (ry < 0 && rx > 0) {
+            // ДИАГОНАЛЬ ВПЕРЕД-ВЛЕВО
+            else if (ry < 0 && rx < 0) {
                 if (rb) {
                     leftUp.setPower(0);
                     leftDown.setPower(-power - boostPower);
@@ -169,18 +158,33 @@ public class TestTeleOp extends LinearOpMode {
                 }
             }
 
-            // ДИАГОНАЛЬ НАЗАД-ВЛЕВО
-            else if (ry < 0 && rx < 0) {
+            // ДИАГОНАЛЬ НАЗАД-ВПРАВО
+            else if (ry > 0 && rx > 0) {
                 if (rb) {
-                    leftUp.setPower(-power - boostPower);
-                    leftDown.setPower(0);
-                    rightUp.setPower(0);
-                    rightDown.setPower(-power - boostPower);
+                    leftUp.setPower(0);
+                    leftDown.setPower(power + boostPower);
+                    rightUp.setPower(power + boostPower);
+                    rightDown.setPower(0);
                 } else {
-                    leftUp.setPower(-power);
+                    leftUp.setPower(0);
+                    leftDown.setPower(power);
+                    rightUp.setPower(power);
+                    rightDown.setPower(0);
+                }
+            }
+
+            // ДИАГОНАЛЬ НАЗАД-ВЛЕВО
+            else if (ry > 0 && rx < 0) {
+                if (rb) {
+                    leftUp.setPower(power + boostPower);
                     leftDown.setPower(0);
                     rightUp.setPower(0);
-                    rightDown.setPower(-power);
+                    rightDown.setPower(power + boostPower);
+                } else {
+                    leftUp.setPower(power);
+                    leftDown.setPower(0);
+                    rightUp.setPower(0);
+                    rightDown.setPower(power);
                 }
             }
 
