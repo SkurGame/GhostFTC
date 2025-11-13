@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.Config;
 
-@Autonomous(name = "test_motor", group = "Concept")
+@Autonomous(name = "test_motor")
 public class TestMotor extends LinearOpMode {
     private DcMotor leftUp;
 
