@@ -4,15 +4,18 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
+import org.firstinspires.ftc.teamcode.Config;
+
 @TeleOp(name = "TeleOp")
 public class BasicTeleOp extends LinearOpMode {
-    private DcMotor leftUp, leftDown, rightUp, rightDown;
+    private DcMotor leftUp, leftDown, rightUp, rightDown, pytka;
 
     public void runOpMode() {
         leftUp = hardwareMap.get(DcMotor.class, "leftUp");
         leftDown = hardwareMap.get(DcMotor.class, "leftDown");
         rightUp = hardwareMap.get(DcMotor.class, "rightUp");
         rightDown = hardwareMap.get(DcMotor.class, "rightDown");
+        pytka = hardwareMap.get(DcMotor.class, "pytka");
         rightUp.setDirection(DcMotor.Direction.REVERSE);
         rightDown.setDirection(DcMotor.Direction.REVERSE);
 
@@ -38,6 +41,13 @@ public class BasicTeleOp extends LinearOpMode {
             leftDown.setPower(0);
             rightUp.setPower(0);
             rightDown.setPower(0);
+
+            // ПЯТКА
+            if (gamepad1.a == true){
+                pytka.setPower(-1.0);
+                sleep(5000);
+                pytka.setPower(0);
+            }
 
             // ПОВОРОТ
             if (gamepad1.left_trigger > 0.1) {
