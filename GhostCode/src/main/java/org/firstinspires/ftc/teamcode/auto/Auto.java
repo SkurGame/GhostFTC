@@ -30,12 +30,12 @@ public class Auto extends LinearOpMode {
         telemetry.addData("Status", "Motor run");
         telemetry.update();
 
-        leftUp.setPower(0.5);
-        leftDown.setPower(0.5);
-        rightUp.setPower(0.5);
-        rightDown.setPower(0.5);
+        leftUp.setPower(-0.5);
+        leftDown.setPower(-0.5);
+        rightUp.setPower(-0.5);
+        rightDown.setPower(-0.5);
 
-        sleep(7000);
+        sleep(500);
 
         leftUp.setPower(0);
         leftDown.setPower(0);

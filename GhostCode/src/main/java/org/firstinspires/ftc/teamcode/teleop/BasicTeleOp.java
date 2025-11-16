@@ -31,7 +31,7 @@ public class BasicTeleOp extends LinearOpMode {
             boolean rb = gamepad1.right_bumper;
 
             double deadZone = 0.15;
-            double power = 0.4;
+            double power = 0.6;
             double boostPower = 0.3;
 
             if (Math.abs(ry) < deadZone) ry = 0;
@@ -42,10 +42,17 @@ public class BasicTeleOp extends LinearOpMode {
             rightUp.setPower(0);
             rightDown.setPower(0);
 
-            // ПЯТКА
-            if (gamepad1.a == true){
+            // ПЯТКА ПОДЬЁМ
+            if (gamepad1.y == true){
                 pytka.setPower(-1.0);
-                sleep(5000);
+                sleep(500);
+                pytka.setPower(0);
+            }
+
+            // ПЯТКА НЕ ПОДЬЁМ
+            if (gamepad1.x == true){
+                pytka.setPower(0.7);
+                sleep(200);
                 pytka.setPower(0);
             }
 
