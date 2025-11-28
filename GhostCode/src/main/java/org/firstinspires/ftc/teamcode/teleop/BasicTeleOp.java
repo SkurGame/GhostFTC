@@ -3,12 +3,14 @@ package org.firstinspires.ftc.teamcode.teleop;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.Config;
 
 @TeleOp(name = "TeleOp")
 public class BasicTeleOp extends LinearOpMode {
-    private DcMotor leftUp, leftDown, rightUp, rightDown, pytka;
+    private DcMotor leftUp, leftDown, rightUp, rightDown, pytka, strelylo;
+    private Servo Talkalo;
 
     public void runOpMode() {
         leftUp = hardwareMap.get(DcMotor.class, "leftUp");
@@ -16,6 +18,10 @@ public class BasicTeleOp extends LinearOpMode {
         rightUp = hardwareMap.get(DcMotor.class, "rightUp");
         rightDown = hardwareMap.get(DcMotor.class, "rightDown");
         pytka = hardwareMap.get(DcMotor.class, "pytka");
+        strelylo = hardwareMap.get(DcMotor.class, "strelylo");
+
+        Talkalo = hardwareMap.get(Servo.class, "Talkalo");
+
         rightUp.setDirection(DcMotor.Direction.REVERSE);
         rightDown.setDirection(DcMotor.Direction.REVERSE);
 
@@ -41,6 +47,9 @@ public class BasicTeleOp extends LinearOpMode {
             leftDown.setPower(0);
             rightUp.setPower(0);
             rightDown.setPower(0);
+
+            // СТРЕЛЯЛО КРУТИТЬ
+            strelylo.setPower(0.5);
 
             // ПЯТКА ПОДЬЁМ
             if (gamepad1.y == true){
