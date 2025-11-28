@@ -51,15 +51,20 @@ public class BasicTeleOp extends LinearOpMode {
             // СТРЕЛЯЛО КРУТИТЬ
             strelylo.setPower(0.5);
 
+            // ТАЛКАТЬ СЕРВОЙ ШАРИК
+            if(gamepad1.y == true){
+
+            }
+
             // ПЯТКА ПОДЬЁМ
-            if (gamepad1.y == true){
+            if (gamepad1.dpad_up == true){
                 pytka.setPower(-1.0);
                 sleep(500);
                 pytka.setPower(0);
             }
 
             // ПЯТКА НЕ ПОДЬЁМ
-            if (gamepad1.x == true){
+            if (gamepad1.dpad_down == true){
                 pytka.setPower(0.7);
                 sleep(200);
                 pytka.setPower(0);
