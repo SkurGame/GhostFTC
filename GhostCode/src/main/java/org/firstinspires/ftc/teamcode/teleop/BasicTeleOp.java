@@ -10,7 +10,7 @@ import org.firstinspires.ftc.teamcode.Config;
 @TeleOp(name = "TeleOp")
 public class BasicTeleOp extends LinearOpMode {
     private DcMotor leftUp, leftDown, rightUp, rightDown, pytka, strelylo;
-    private Servo Talkalo;
+    private Servo talkalo;
 
     public void runOpMode() {
         leftUp = hardwareMap.get(DcMotor.class, "leftUp");
@@ -20,7 +20,7 @@ public class BasicTeleOp extends LinearOpMode {
         pytka = hardwareMap.get(DcMotor.class, "pytka");
         strelylo = hardwareMap.get(DcMotor.class, "strelylo");
 
-        Talkalo = hardwareMap.get(Servo.class, "Talkalo");
+        talkalo = hardwareMap.get(Servo.class, "talkalo");
 
         rightUp.setDirection(DcMotor.Direction.REVERSE);
         rightDown.setDirection(DcMotor.Direction.REVERSE);
@@ -36,6 +36,8 @@ public class BasicTeleOp extends LinearOpMode {
             double rx = gamepad1.right_stick_x;
             boolean rb = gamepad1.right_bumper;
 
+            boolean OnOffStrelyt = false;
+
             double deadZone = 0.15;
             double power = 0.6;
             double boostPower = 0.3;
@@ -47,13 +49,16 @@ public class BasicTeleOp extends LinearOpMode {
             leftDown.setPower(0);
             rightUp.setPower(0);
             rightDown.setPower(0);
+            strelylo.setPower(0.1);
 
-            // СТРЕЛЯЛО КРУТИТЬ
-            strelylo.setPower(0.5);
+            talkalo.setPosition(0.0);
 
-            // ТАЛКАТЬ СЕРВОЙ ШАРИК
-            if(gamepad1.y == true){
-
+            if(gamepad1.y){
+                strelylo.setPower(0.5);
+                sleep(1500);
+                talkalo.setPosition(0.6);
+                talkalo.setPosition(0.0);
+                strelylo.setPower(0.1);
             }
 
             // ПЯТКА ПОДЬЁМ
