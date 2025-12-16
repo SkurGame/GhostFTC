@@ -8,10 +8,10 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@Autonomous(name = "BasicAuto")
-public class Auto extends LinearOpMode {
+@Autonomous(name = "AutoSharik")
+public class AutoSharik extends LinearOpMode {
 
-    private DcMotor leftUp, leftDown, rightUp, rightDown;
+    private DcMotor leftUp, leftDown, rightUp, rightDown, strelylo;
     private Servo talkalo;
 
     @Override
@@ -20,6 +20,7 @@ public class Auto extends LinearOpMode {
         leftDown = hardwareMap.get(DcMotor.class, "leftDown");
         rightUp = hardwareMap.get(DcMotor.class, "rightUp");
         rightDown = hardwareMap.get(DcMotor.class, "rightDown");
+        strelylo = hardwareMap.get(DcMotor.class, "strelylo");
 
         talkalo = hardwareMap.get(Servo.class, "talkalo");
 
@@ -37,19 +38,25 @@ public class Auto extends LinearOpMode {
         telemetry.addData("Status", "Motor run");
         telemetry.update();
 
-        leftUp.setPower(-0.5);
-        leftDown.setPower(-0.5);
-        rightUp.setPower(-0.5);
-        rightDown.setPower(-0.5);
+        leftUp.setPower(0.5);
+        leftDown.setPower(0.5);
+        rightUp.setPower(0.5);
+        rightDown.setPower(0.5);
 
-        sleep(500);
+        sleep(700);
 
         leftUp.setPower(0);
         leftDown.setPower(0);
         rightUp.setPower(0);
         rightDown.setPower(0);
 
-        telemetry.addData("Status", "Motor stop");
+        strelylo.setPower(0.6);
+        sleep(2500);
+        talkalo.setPosition(0);
+        sleep(2500);
+        talkalo.setPosition(1);
+        strelylo.setPower(0);
+
         telemetry.update();
     }
 }

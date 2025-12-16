@@ -25,6 +25,12 @@ public class BasicTeleOp extends LinearOpMode {
         rightUp.setDirection(DcMotor.Direction.REVERSE);
         rightDown.setDirection(DcMotor.Direction.REVERSE);
 
+        leftUp.setPower(0);
+        leftDown.setPower(0);
+        rightUp.setPower(0);
+        rightDown.setPower(0);
+
+        talkalo.setPosition(0.8);
 
         telemetry.addData("Status", "Initialized");
         telemetry.update();
@@ -36,7 +42,7 @@ public class BasicTeleOp extends LinearOpMode {
             double rx = gamepad1.right_stick_x;
             boolean rb = gamepad1.right_bumper;
 
-            boolean OnOffStrelyt = false;
+            boolean human_zagruz = false;
 
             double deadZone = 0.15;
             double power = 0.6;
@@ -49,21 +55,30 @@ public class BasicTeleOp extends LinearOpMode {
             leftDown.setPower(0);
             rightUp.setPower(0);
             rightDown.setPower(0);
-            strelylo.setPower(0.1);
 
-            talkalo.setPosition(0.0);
+            if (gamepad1.right_stick_button == true){
+                talkalo.setPosition(1);
+                human_zagruz = true;
+            }
 
+            if (gamepad1.left_stick_button == true){
+                talkalo.setPosition(0.8);
+                human_zagruz = false;
+            }
+
+            // СТРЕЛЯЛО
             if(gamepad1.y){
-                strelylo.setPower(0.5);
-                sleep(1500);
-                talkalo.setPosition(0.6);
-                talkalo.setPosition(0.0);
+                strelylo.setPower(0.6);
+                sleep(2500);
+                talkalo.setPosition(0);
+                sleep(500);
+                talkalo.setPosition(0.8);
                 strelylo.setPower(0.1);
             }
 
             // ПЯТКА ПОДЬЁМ
             if (gamepad1.dpad_up == true){
-                pytka.setPower(-1.0);
+                pytka.setPower(-0.7);
                 sleep(500);
                 pytka.setPower(0);
             }
@@ -229,6 +244,7 @@ public class BasicTeleOp extends LinearOpMode {
             telemetry.addData("LeftDown", "%.2f", leftDown.getPower());
             telemetry.addData("RightUp", "%.2f", rightUp.getPower());
             telemetry.addData("RightDown", "%.2f", rightDown.getPower());
+            telemetry.addData("ServoPosition", "%.2f", talkalo.getPosition());
             telemetry.addData("Boost", rb ? "ON" : "OFF");
             telemetry.update();
         }
