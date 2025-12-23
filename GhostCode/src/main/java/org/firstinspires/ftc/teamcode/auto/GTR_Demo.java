@@ -17,6 +17,8 @@ public class GTR_Demo extends LinearOpMode {
 
         // 2. Добавление моторов (имена должны совпадать с конфигурацией в Driver Hub)
         gtr.addMotor("leftUp", 0.7, false);
+        gtr.addMotor("leftDown", 0.7, false);
+
 
         // 3. Показываем адрес веб-интерфейса
         telemetry.addData("GTR", "Готов к работе!");
@@ -29,8 +31,7 @@ public class GTR_Demo extends LinearOpMode {
 
         // 4. Главный цикл просто поддерживает соединение
         while (opModeIsActive()) {
-            telemetry.addData("GTR Статус", gtr.isRecording() ? "Запись" :
-                    gtr.isPlaying() ? "Воспроизведение" : "Ожидание");
+            telemetry.addData("GTR Статус", gtr.isRecording());
             telemetry.addData("Записано точек", gtr.getRecordedPointsCount());
             telemetry.update();
             sleep(1000);
