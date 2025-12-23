@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@Autonomous(name = "AutoSharik")
+@Autonomous(name = "AutoSharik", group = "auto")
 public class AutoSharik extends LinearOpMode {
 
     private DcMotor leftUp, leftDown, rightUp, rightDown, strelylo;
