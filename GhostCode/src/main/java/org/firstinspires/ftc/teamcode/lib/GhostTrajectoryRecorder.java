@@ -663,7 +663,6 @@ public class GhostTrajectoryRecorder {
                     "    <div class='container'>" +
                     "        <div class='header'>" +
                     "            <h1>Ghost Trajectory Recorder</h1>" +
-                    "            <div class='subtitle'>Простой рекордер траекторий для FTC</div>" +
                     "        </div>" +
                     "        " +
                     "        <div class='status-bar'>" +
@@ -725,7 +724,7 @@ public class GhostTrajectoryRecorder {
                     "        </div>" +
                     "        " +
                     "        <div class='footer'>" +
-                    "            GTR v6.0 | Подключено к роботу | <span id='connectionInfo'>IP: загрузка...</span>" +
+                    "            GTR v1.0 | <span id='connectionInfo'>IP: загрузка...</span>" +
                     "        </div>" +
                     "    </div>" +
                     "    " +
