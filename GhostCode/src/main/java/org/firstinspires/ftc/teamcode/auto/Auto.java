@@ -1,61 +1,59 @@
 package org.firstinspires.ftc.teamcode.auto;
 
-import android.net.http.UrlRequest;
-
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
 @Autonomous(name = "BasicAuto", group = "auto")
 public class Auto extends LinearOpMode {
-// ====================================================
-// Автономный режим - Ghost Trajectory Recorder
-// Сгенерировано: Tue Dec 23 16:47:00 GMT+03:00 2025
-// Точки: 98
-// Движений: 2
-// ====================================================
 
-    // Объявление моторов
-    private DcMotor leftUp;
+    private DcMotor leftUp, leftDown, rightUp, rightDown, strelylo;
+    private Servo talkalo;
 
     @Override
-    public void runOpMode() {
-        // Инициализация моторов
+    public void runOpMode(){
         leftUp = hardwareMap.get(DcMotor.class, "leftUp");
+        leftDown = hardwareMap.get(DcMotor.class, "leftDown");
+        rightUp = hardwareMap.get(DcMotor.class, "rightUp");
+        rightDown = hardwareMap.get(DcMotor.class, "rightDown");
+        strelylo = hardwareMap.get(DcMotor.class, "strelylo");
 
-        // Настройка моторов
-        leftUp.setDirection(DcMotor.Direction.FORWARD);
-        leftUp.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        leftUp.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        leftUp.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        talkalo = hardwareMap.get(Servo.class, "talkalo");
+
+        rightUp.setDirection(DcMotor.Direction.REVERSE);
+        rightDown.setDirection(DcMotor.Direction.REVERSE);
+
+        leftUp.setPower(0);
+        leftDown.setPower(0);
+        rightUp.setPower(0);
+        rightDown.setPower(0);
+
+        talkalo.setPosition(0.8);
 
         waitForStart();
+        telemetry.addData("Status", "Motor run");
+        telemetry.update();
 
-        // Движение 1: leftUp -> 502
-        leftUp.setTargetPosition(502);
-        leftUp.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        leftUp.setPower(0.70);
-        while (opModeIsActive() && leftUp.isBusy()) {
-            sleep(20);
-        }
-        sleep(50);
+        leftUp.setPower(0.5);
+        leftDown.setPower(0.5);
+        rightUp.setPower(0.5);
+        rightDown.setPower(0.5);
 
-        // Движение 2: leftUp -> -287
-        leftUp.setTargetPosition(-287);
-        leftUp.setPower(0.70);
-        while (opModeIsActive() && leftUp.isBusy()) {
-            sleep(20);
-        }
+        sleep(700);
 
-        // Остановка
         leftUp.setPower(0);
-        for (DcMotor motor : new DcMotor[]{leftUp}) {
-            motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        }
+        leftDown.setPower(0);
+        rightUp.setPower(0);
+        rightDown.setPower(0);
 
-        telemetry.addData("Status", "Complete");
+        strelylo.setPower(0.6);
+        sleep(2500);
+        talkalo.setPosition(0);
+        sleep(2500);
+        talkalo.setPosition(1);
+        strelylo.setPower(0);
+
         telemetry.update();
     }
 }
