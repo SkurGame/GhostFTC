@@ -42,8 +42,6 @@ public class BasicTeleOp extends LinearOpMode {
             double rx = gamepad1.right_stick_x;
             boolean rb = gamepad1.right_bumper;
 
-            boolean human_zagruz = false;
-
             double deadZone = 0.15;
             double power = 0.6;
             double boostPower = 0.3;
@@ -56,14 +54,12 @@ public class BasicTeleOp extends LinearOpMode {
             rightUp.setPower(0);
             rightDown.setPower(0);
 
-            if (gamepad1.right_stick_button == true){
+            if (gamepad1.right_stick_button){
                 talkalo.setPosition(1);
-                human_zagruz = true;
             }
 
-            if (gamepad1.left_stick_button == true){
+            if (gamepad1.left_stick_button){
                 talkalo.setPosition(0.8);
-                human_zagruz = false;
             }
 
             // СТРЕЛЯЛО
