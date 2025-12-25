@@ -73,14 +73,14 @@ public class BasicTeleOp extends LinearOpMode {
             }
 
             // ПЯТКА ПОДЬЁМ
-            if (gamepad1.dpad_up == true){
+            if (gamepad1.dpad_up){
                 pytka.setPower(-0.7);
                 sleep(500);
                 pytka.setPower(0);
             }
 
             // ПЯТКА НЕ ПОДЬЁМ
-            if (gamepad1.dpad_down == true){
+            if (gamepad1.dpad_down){
                 pytka.setPower(0.7);
                 sleep(200);
                 pytka.setPower(0);
