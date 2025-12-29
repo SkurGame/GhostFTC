@@ -7,8 +7,8 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.util.EncoderConverter;
 
-@Autonomous(name = "BasicAuto", group = "auto")
-public class Auto extends LinearOpMode {
+@Autonomous(name = "AutoBezShar", group = "auto")
+public class AutoBezShar extends LinearOpMode {
 
     private DcMotor leftUp, leftDown, rightUp, rightDown, strelylo, sasat;
     private Servo talkalo;
@@ -89,13 +89,6 @@ public class Auto extends LinearOpMode {
         waitForStart();
 
         driveDistance(100.0, 0.5, 10.0);
-
-        strelylo.setPower(0.7);
-        sleep(2500);
-        talkalo.setPosition(0);
-        sleep(500);
-        talkalo.setPosition(1.0);
-        strelylo.setPower(0.1);
 
         while (opModeIsActive()){
             telemetry.addData("Position", "%.2f", talkalo.getPosition());
